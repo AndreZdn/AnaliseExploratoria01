@@ -15,19 +15,27 @@ with st.sidebar:
 
 # Definição dinâmica da paleta de cores baseado no toggle
 if modo_escuro:
-    COR_FUNDO = "#0F172A"          # Slate 900 (Fundo principal)
-    COR_CARD = "#1E293B"           # Slate 800 (Cards e Abas)
-    COR_SIDEBAR = "#1E293B"        # Slate 800 (Barra lateral)
-    COR_TEXTO_PRINCIPAL = "#F8FAFC" # Slate 50  (Textos principais e títulos)
-    COR_TEXTO_MUTED = "#94A3B8"     # Slate 400 (Textos secundários e rótulos de métricas)
-    COR_GRID = "#334155"           # Slate 700 (Linhas de gráficos e bordas)
+    COR_FUNDO = "#0F172A"          
+    COR_CARD = "#1E293B"           
+    COR_SIDEBAR = "#1E293B"        
+    COR_TEXTO_PRINCIPAL = "#F8FAFC" 
+    COR_TEXTO_MUTED = "#94A3B8"     
+    COR_GRID = "#334155"           
+    # Novas variáveis forçadas para os inputs
+    COR_WIDGET_BG = "#334155"
+    COR_WIDGET_BORDER = "#475569"
+    COR_DROPDOWN_BG = "#1E293B"
 else:
-    COR_FUNDO = "#FAFAF7"          # Cinza claro original
-    COR_CARD = "#FFFFFF"           # Branco puro
-    COR_SIDEBAR = "#FFFFFF"        # Barra lateral branca
-    COR_TEXTO_PRINCIPAL = "#1F2937" # Cinza escuro
-    COR_TEXTO_MUTED = "#6B7280"     # Cinza médio
-    COR_GRID = "#E5E7EB"           # Linha de borda clara
+    COR_FUNDO = "#FAFAF7"          
+    COR_CARD = "#FFFFFF"           
+    COR_SIDEBAR = "#FFFFFF"        
+    COR_TEXTO_PRINCIPAL = "#1F2937" 
+    COR_TEXTO_MUTED = "#6B7280"     
+    COR_GRID = "#E5E7EB"           
+    # Novas variáveis forçadas para os inputs
+    COR_WIDGET_BG = "#FFFFFF"
+    COR_WIDGET_BORDER = "#D1D5DB"
+    COR_DROPDOWN_BG = "#FFFFFF"
 
 # Injeção do CSS ULTRA-ESPECÍFICO
 st.markdown(f"""
@@ -104,9 +112,22 @@ st.markdown(f"""
         border-bottom-color: #F97316 !important;
     }}
 
-    /* 7. WIDGETS (Inputs e select boxes) */
-    {"div[data-baseweb='select'] > div { background-color: #334155 !important; border-color: #475569 !important; }" if modo_escuro else ""}
-    {"div[role='listbox'] { background-color: #1E293B !important; }" if modo_escuro else ""}
+    /* 7. WIDGETS (Inputs, Multiselect e Tags) */
+    div[data-baseweb="select"] > div {{
+        background-color: {COR_WIDGET_BG} !important;
+        border-color: {COR_WIDGET_BORDER} !important;
+    }}
+    div[role="listbox"] {{
+        background-color: {COR_DROPDOWN_BG} !important;
+    }}
+    /* Corrigindo as "pílulas" dos países selecionados para ficarem laranja com texto branco */
+    span[data-baseweb="tag"] {{
+        background-color: #F97316 !important;
+        color: #FFFFFF !important;
+    }}
+    span[data-baseweb="tag"] svg {{
+        fill: #FFFFFF !important; /* Pinta o ícone do Xzinho de branco */
+    }}
 
     /* 8. BOTÃO DE AÇÃO PRINCIPAL (Aplicar Filtros) */
     div[data-testid="stButton"] button {{
@@ -119,7 +140,7 @@ st.markdown(f"""
         transition: all 0.3s ease;
     }}
     div[data-testid="stButton"] button:hover {{
-        background-color: #EA580C !important; /* Laranja mais escuro no hover */
+        background-color: #EA580C !important;
         color: #FFFFFF !important;
         border: none !important;
     }}
