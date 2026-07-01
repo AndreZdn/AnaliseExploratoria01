@@ -47,13 +47,19 @@ st.markdown(f"""
     header[data-testid="stHeader"] {{
         background-color: {COR_FUNDO} !important; 
     }}
-    /* Força textos, botões, ícones SVG e seus traços internos a acompanharem a cor legível */
-    header[data-testid="stHeader"] *,
+    
+    /* Ataca ESPECIFICAMENTE o conteúdo dentro dos botões do cabeçalho */
     header[data-testid="stHeader"] button,
-    header[data-testid="stHeader"] svg,
-    header[data-testid="stHeader"] path {{
+    header[data-testid="stHeader"] button span,
+    header[data-testid="stHeader"] button p {{
         color: {COR_TEXTO_PRINCIPAL} !important;
+    }}
+    
+    /* Garante que os SVGs (ícones do GitHub, Estrela, etc) sejam preenchidos com a cor correta */
+    header[data-testid="stHeader"] button svg,
+    header[data-testid="stHeader"] button svg path {{
         fill: {COR_TEXTO_PRINCIPAL} !important;
+        color: {COR_TEXTO_PRINCIPAL} !important;
     }}
     /* 2. BARRA LATERAL (Fundo, textos e divisória) */
     section[data-testid="stSidebar"] {{
