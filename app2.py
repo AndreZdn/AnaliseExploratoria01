@@ -40,17 +40,20 @@ else:
 # Injeção do CSS ULTRA-ESPECÍFICO
 st.markdown(f"""
 <style>
-  /* 1. FUNDO PRINCIPAL E BARRA SUPERIOR BRANCA (HEADER) */
+    /* 1. FUNDO PRINCIPAL E BARRA SUPERIOR BRANCA (HEADER) */
     .stApp {{
         background-color: {COR_FUNDO} !important;
     }}
     header[data-testid="stHeader"] {{
-        background-color: {COR_FUNDO} !important; /* Removido o transparent para não vazar o fundo */
+        background-color: {COR_FUNDO} !important; 
     }}
-    /* Força os ícones e textos do cabeçalho (Share, Deploy) a acompanharem o contraste do tema */
-    header[data-testid="stHeader"] * {{
-        color: {COR_TEXTO_MUTED} !important;
-        fill: {COR_TEXTO_MUTED} !important;
+    /* Força textos, botões, ícones SVG e seus traços internos a acompanharem a cor legível */
+    header[data-testid="stHeader"] *,
+    header[data-testid="stHeader"] button,
+    header[data-testid="stHeader"] svg,
+    header[data-testid="stHeader"] path {{
+        color: {COR_TEXTO_PRINCIPAL} !important;
+        fill: {COR_TEXTO_PRINCIPAL} !important;
     }}
     /* 2. BARRA LATERAL (Fundo, textos e divisória) */
     section[data-testid="stSidebar"] {{
